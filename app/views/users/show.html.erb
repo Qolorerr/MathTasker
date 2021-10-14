@@ -1,0 +1,22 @@
+<h1><%= @user.nickname %></h1>
+<p><%= @user.discription %></p>
+<p>
+    Created tasks:
+    <% @user.tasks.each do |t| %>
+        <div>
+            <p>
+                <%= link_to t.title, task_path(t) %>
+            </p>
+        </div>
+    <% end %>
+</p>
+<p>
+    Completed tasks:
+    <% @user.completed_task_ids.split(',').each do |t| %>
+        <div>
+            <p>
+                <%= link_to Task.find(t.to_i).title, task_path(Task.find(t.to_i)) %>
+            </p>
+        </div>
+    <% end %>
+</p>

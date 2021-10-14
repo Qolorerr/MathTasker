@@ -1,0 +1,8 @@
+<h1>All tasks</h1>
+<% @tasks.each do |task| %>
+    <p>
+        <h3>
+            <%= link_to task.title, task_path(task), style: "text-decoration:none; color:black;" %>
+        </h3>
+    </p>
+<% end %>

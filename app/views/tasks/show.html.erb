@@ -1,0 +1,34 @@
+<h1><%= @task.title %></h1>
+<p><%= markdown(@task.body) %></p>
+
+<hr>
+
+<p>
+    posted by <%= link_to @task.creator.nickname, user_path(@task.creator) %>
+</p>
+
+<p>
+    <% if @task.creator == Current.user %>
+        <%= link_to "Edit", edit_task_path(@task) %>
+        <%= link_to "Delete", task_path(@task), method: :delete, data: { confirm: "Are you sure you want to delete the task?" } %>
+    <% end %>
+</p>
+
+<hr>
+
+<% if !Current.user.nil? %>
+    <% if Current.user.completed_task_ids.split(",").include? @task.id.to_s %>
+        You have already done this task<br>
+    <% else %>
+        <%= form_for @task, :url => { :action => "check_user_answer" } do |f| %>
+        <p>
+            Your answer:<br>
+            <%= f.text_field :user_answer, { :class => "form-control"} %>
+        </p>
+
+        <p>
+            <%= f.submit "Check", { :class => "btn btn-success"} %>
+        </p>
+        <% end %>
+    <% end %>
+<% end %>

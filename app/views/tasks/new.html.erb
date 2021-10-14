@@ -1,0 +1,25 @@
+<h2>Add new task</h2>
+<%= form_for :task, url: tasks_path do |f| %>
+    <% if @task.errors.any? %>
+        <% @task.errors.full_messages.each do |msg| %>
+            <div><%= msg %></div>
+        <% end %>
+    <% end %>
+
+    <p>
+        Title<br>
+        <%= f.text_field :title, { :class => "form-control"} %>
+    </p>
+    <p>
+        The task<br>
+        <%= f.text_area :body, { :class => "form-control"} %>
+    </p>
+    <p>
+        Answer to the task<br>
+        <%= f.text_field :answer, { :class => "form-control"} %>
+    </p>
+
+    <p>
+        <%= f.submit "Submit", { :class => "btn btn-success"} %>
+    </p>
+<% end -%>
